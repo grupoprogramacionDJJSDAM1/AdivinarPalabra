@@ -1,4 +1,3 @@
-package codigo;
 
 import java.util.Arrays;
 
@@ -30,8 +29,8 @@ public class Palabra {
 	public boolean[] getPosicionesOcupadas() {
 		return posicionesOcupadas;
 	}
-	public void setPosicionesOcupadas(boolean[] posicionesOcupadas) {
-		this.posicionesOcupadas = posicionesOcupadas;
+	public void setPosicionesOcupadas(int posicion) {
+		this.posicionesOcupadas[posicion]=true;
 	}
 	
 	public boolean comprobarLetra(char letrasDisponibles[], String valor) {

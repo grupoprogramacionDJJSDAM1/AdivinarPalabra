@@ -1,36 +1,56 @@
-package codigo;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 
+
 public class Partida {
 private static LocalDate fecha=LocalDate.now();
+private static int elegirPalabra;
+private static int elegirLetra;
 private static String nombrejugador;
-private final static int INTENTOS=3;
-private Palabra palabras[];
+private  static int intentos=3;
+private static Palabra palabras[];
+private static char letrasVacias[]; //array para mostrar la palabra a adivinar.
+private static boolean posicionOcupada[];
 public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 public static boolean salirBucle = false;
 
-public Partida(LocalDate fecha, String nombrejugador, Palabra[] palabras) {
+public Partida(LocalDate fecha, String nombrejugador, Palabra[] arrayPalabras) {
 	
 	this.fecha = fecha;
 	this.nombrejugador = nombrejugador;
-	this.palabras = palabras;
+	this.palabras = arrayPalabras;
+	
 }
 
 
-public Partida() {
+public Partida(Palabra arrayPalabras[]) {
+	this.palabras = arrayPalabras;
+	}
+
+public static void numeroRandom() throws IOException, NullPointerException {
+	 elegirPalabra =(int)(Math.random()*(3)+1);
+	 	
+}
+
+public static void comenzar() throws IOException  {
+	System.out.println("Introduzca su nombre para comenzar la partida:");
+	nombrejugador=br.readLine();
+	numeroRandom();
 	
 }
 
 public static void pintarMenuPrincipal() {
+	
 
-    System.out.println(nombrejugador +" "+"|" + fecha +"|"+ " "+ "Intentos:" + INTENTOS + " "+"" + "\n" );
+    System.out.println(nombrejugador +" "+"|" + fecha +"|"+ " "+ "Intentos:" + intentos + " "+"" + "\n" );
+    rellenarHuecos();
+    
+    System.out.println(letrasVacias);
+    
     System.out.println("*****************************************************************************");
     System.out.println("--------------------------ADIVINAR PALABRAS----------------------------------");
-//    System.out.println("----------------------"+" "+ nombrejugador +" "+"|" + fecha +"|"+ " "+ "Intentos:" +INTENTOS + " " + "-------------------------");
     System.out.println("------------------------1. Resolver palabra----------------------------------");
     System.out.println("------------------------2. Decir letra---------------------------------------");
     System.out.println("------------------------3. Dar palabra---------------------------------------");
@@ -41,10 +61,11 @@ public static void pintarMenuPrincipal() {
 }
 
 
-public static void menu() throws IOException {
+public static void menu() throws IOException, NullPointerException{
 
 	do {
 		try {
+			
 			pintarMenuPrincipal();
 			int opcion = Integer.parseInt(br.readLine()); // lee la opcion del usuario
 
@@ -60,6 +81,8 @@ public static void menu() throws IOException {
 			case 3:
 				System.out.println("Has elegido dar palabra.");
 				darPalabra();
+				System.out.println("Has perdido!!");
+				salirBucle=true;
 				break;
 			case 4:
 				System.out.println("Has elegido salir.");
@@ -79,7 +102,7 @@ public static void menu() throws IOException {
 }
 
 private static void darPalabra() {
-	
+	System.out.println("La palabra es " + palabras[elegirPalabra].getValor());
 }
 
 
@@ -88,8 +111,37 @@ private static void decirLetra() {
 }
 
 
-public static void resolverPalabra() {
+public static void resolverPalabra() throws IOException {
+	System.out.println("Introduzca la palabra:");
+	String resolverPalabra=br.readLine();
 	
+	if (!resolverPalabra.equals(palabras[elegirPalabra].getValor())) {
+		System.out.println("Has fallado!!");
+		intentos--;
+		while (intentos==0) {
+			salirBucle=true;
+			System.out.println("Has perdido!! Te quedaste sin intentos!!");
+		}
+	}else {
+		System.out.println("Enhorabuena!! ");
+		salirBucle=true;
+			
+		}
+	}
+public static void rellenarHuecos() {
+	letrasVacias=new char [palabras[elegirPalabra].getLetrasDisponibles().length];
+	for (int i = 0; i < (palabras[elegirPalabra].getValor().length()/2); i++) {
+		 elegirLetra =(int)(Math.random()*((palabras[elegirPalabra].getValor().length())));
+		letrasVacias [elegirLetra]= palabras[elegirPalabra].getLetrasDisponibles()[elegirLetra];
+		palabras[elegirPalabra].setPosicionesOcupadas(elegirLetra);
+	}
+	for (int j = 0; j < letrasVacias.length; j++) {
+		if(palabras[elegirPalabra].getPosicionesOcupadas()[j]==false){
+		letrasVacias[j]='*';
+		
+		}
+	}
+}
 }
 
-}
+
