@@ -46,7 +46,6 @@ public static void pintarMenuPrincipal() {
 
     System.out.println(nombrejugador +" "+"|" + fecha +"|"+ " "+ "Intentos:" + intentos + " "+"" + "\n" );
     rellenarHuecos();
-    
     System.out.println(letrasVacias);
     
     System.out.println("*****************************************************************************");
@@ -123,7 +122,7 @@ public static void resolverPalabra() throws IOException {
 			System.out.println("Has perdido!! Te quedaste sin intentos!!");
 		}
 	}else {
-		System.out.println("Enhorabuena!! ");
+		System.out.println("Enhorabuena!! Has ganado!! ");
 		salirBucle=true;
 			
 		}
@@ -137,7 +136,7 @@ public static void rellenarHuecos() {
 	}
 	for (int j = 0; j < letrasVacias.length; j++) {
 		if(palabras[elegirPalabra].getPosicionesOcupadas()[j]==false){
-		letrasVacias[j]='*';
+		letrasVacias[j]='_';
 		
 		}
 	}
