@@ -155,19 +155,15 @@ public class Partida {
 		}
 	}
 
-	public static void rellenarHuecos() {
-		letrasVacias = new char[palabras[elegirPalabra].getLetrasDisponibles().length];
-		for (int i = 0; i < (palabras[elegirPalabra].getValor().length() / 2); i++) {
-			elegirLetra = (int) (Math.random() * ((palabras[elegirPalabra].getValor().length())));
-			letrasVacias[elegirLetra] = palabras[elegirPalabra].getLetrasDisponibles()[elegirLetra];
-			palabras[elegirPalabra].setPosicionesOcupadas(elegirLetra);
-		}
-		for (int j = 0; j < letrasVacias.length; j++) {
-			if (palabras[elegirPalabra].getPosicionesOcupadas()[j] == false) {
-				letrasVacias[j] = '*';
-			}
-		}
-	}
+    public static void rellenarHuecos() {//metodo de rellenar el array vacio espejo con las letras seleccionadas a
+        letrasVacias = new char[palabras[elegirPalabra].getLetrasDisponibles().length];//inicializamos el array con la longitud del array char de la palabra seleccionada
+        for (int i = 0; i < (palabras[elegirPalabra].getValor().length() / 2); i++) {//for con la mitad de la longitud de la palabra
+            elegirLetra = (int) (Math.random() * ((palabras[elegirPalabra].getValor().length())));//posicion aleatoria para revelar letras
+            letrasVacias[elegirLetra] = palabras[elegirPalabra].getLetrasDisponibles()[elegirLetra];//se le da el valor de la letra que esté en la posicion salida anteriormente
+            palabras[elegirPalabra].setPosicionesOcupadas(elegirLetra);//se pone la posicion de la letra en true en su array de booleanos, que está lleno de falses
+}
+        }
+    
 
 	public static int contarAsteriscos() { //método cuenta los asteriscos para cuando queden 2 o menos letras por adivinar pierde automaticamente.
 		int contadorAsterisco = 0;
