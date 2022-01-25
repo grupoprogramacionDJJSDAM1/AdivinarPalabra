@@ -7,7 +7,10 @@ import java.time.LocalDate;
 
  * Fecha: 25/01/22
  * Autor: Jaime Fernando Martín Gil, Jorge Parra López, David Mateos Lorenzo y Saul Fernández García.
- * Comentarios: -Metodo menuPrincipal() no devuelve nada ni tiene parametros. 
+ * Comentarios: 
+ * -Constructores Partida() con parámetros y Partida() sin parametros.
+ * 
+ * -Metodo menuPrincipal() no devuelve nada ni tiene parametros. 
  * -Metodo pintarOpcionesMenu() no devuelve nada ni tiene parametros. 
  *-Metodo suma(), resta(), multiplicacion() y division() con dos variables por parametro (numero1 y numero2) 
  * y devuelve un double.
@@ -38,14 +41,13 @@ public class Partida {
 	}
 
 	public static void numeroRandom() throws IOException, NullPointerException { 
-		elegirPalabra = (int) (Math.random() * (3));
+		elegirPalabra = (int) (Math.random() * (3)); //genera una palabra aleatoria entre las 3 que hay.
 	}
 
 	public static void comenzar() throws IOException {
 		System.out.println("Introduzca su nombre para comenzar la partida:");
-		nombrejugador = br.readLine();
-		numeroRandom();
-
+		nombrejugador = br.readLine(); //recoge el nombre introducido por teclado.
+		numeroRandom(); //llamada al método para que genere una de las 3 palabras.
 	}
 
 	public static void pintarMenuPrincipal() {
@@ -64,8 +66,8 @@ public class Partida {
 		System.out.println("\n Elige una opcion del 1 al 4: ");
 	}
 
-	public static void menu() throws IOException, NullPointerException {
-		rellenarHuecos();
+	public void menu() throws IOException, NullPointerException {
+		rellenarHuecos(); 
 		do {
 			try {
 
@@ -80,7 +82,7 @@ public class Partida {
 					break;
 				case 2:
 					System.out.println("Has elegido decir letra.");
-					if (contarAsteriscos() <= 2) {
+					if (contarAsteriscos() <= 2) {  //si quedan dos o menos letras por adivinar pierde automaticamente.
 						System.out.println("Has perdido!!");
 						salirBucle = true;
 						break;
@@ -112,16 +114,16 @@ public class Partida {
 
 	}
 
-	private static void darPalabra() {
+	private static void darPalabra() { //Obtiene el valor de la palabra y se muestra al jugador.
 		System.out.println("La palabra es " + palabras[elegirPalabra].getValor());
 	}
 
-	private static void decirLetra() throws IOException {
+	private static void decirLetra() throws IOException { //metodo desvela la letra que introduce el jugador.
 		System.out.println("Introduzca una letra:");
 		letraIntroducida = (char) br.read();
 		int bandera = 0;// variable que se incrementa si encuentra la letra.
 		for (int i = 0; i < letrasVacias.length; i++) {
-			if (letraIntroducida == palabras[elegirPalabra].getLetrasDisponibles()[i]) {
+			if (letraIntroducida == palabras[elegirPalabra].getLetrasDisponibles()[i]) { //
 				letrasVacias[i] = letraIntroducida;
 				palabras[elegirPalabra].setPosicionesOcupadas(i);
 				bandera++;
@@ -132,7 +134,7 @@ public class Partida {
 		}
 	}
 
-	public static void resolverPalabra() throws IOException {
+	public static void resolverPalabra() throws IOException { //se le pide que introduzca la palabra 
 		System.out.println("Introduzca la palabra:");
 		String resolverPalabra = br.readLine();
 
