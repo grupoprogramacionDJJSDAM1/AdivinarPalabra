@@ -10,11 +10,14 @@ import java.time.LocalDate;
  * Comentarios: 
  * -Constructores Partida() con parámetros y Partida() sin parametros.
  * 
- * -Metodo menuPrincipal() no devuelve nada ni tiene parametros. 
- * -Metodo pintarOpcionesMenu() no devuelve nada ni tiene parametros. 
- *-Metodo suma(), resta(), multiplicacion() y division() con dos variables por parametro (numero1 y numero2) 
- * y devuelve un double.
- * -Metodo pedirDatos() que es interactivo y no devuelve nada ni tiene parametros y un main.
+ * -Metodo numeroRandom() genera una palabra aleatoria entre las 3 que hay.
+ * -Metodo pintarMenuPrincipal() no devuelve nada ni tiene parametros, pinta el menu. 
+ *-Metodo menu() ejecuta el menu.
+ * -Metodo darPalabra() Obtiene el valor de la palabra y se muestra al jugador.
+ * -Metodo decirLetra() desvela la letra que introduce el jugador.
+ * -Metodo resolverPalabra() se le pide que introduzca la palabra.
+ * -Metodo rellenearHuecos() no tiene parámetros ni devuelve nada.
+ * -Método contarAsteriscos() no tiene parámetros y devuelve un entero con los asteriscos.
  *  
  */
 
@@ -123,7 +126,7 @@ public class Partida {
 		letraIntroducida = (char) br.read();
 		int bandera = 0;// variable que se incrementa si encuentra la letra.
 		for (int i = 0; i < letrasVacias.length; i++) {
-			if (letraIntroducida == palabras[elegirPalabra].getLetrasDisponibles()[i]) { //
+			if (letraIntroducida == palabras[elegirPalabra].getLetrasDisponibles()[i]) {  //compara la letra introducida con la letra de la palabra de esa posición.
 				letrasVacias[i] = letraIntroducida;
 				palabras[elegirPalabra].setPosicionesOcupadas(i);
 				bandera++;
@@ -138,15 +141,15 @@ public class Partida {
 		System.out.println("Introduzca la palabra:");
 		String resolverPalabra = br.readLine();
 
-		if (!resolverPalabra.equals(palabras[elegirPalabra].getValor())) {
-			System.out.println("Has fallado!!");
+		if (!resolverPalabra.equals(palabras[elegirPalabra].getValor())) { //comprueba si la palabra introducida es distinta y si lo es,
+			System.out.println("Has fallado!!");							//muestra el mensaje de error y se resta 1 a los intentos.
 			intentos--;
-			while (intentos == 0) {
+			while (intentos == 0) { //si se queda sin intentos se acaba la partida.
 				salirBucle = true;
 				System.out.println("Has perdido!! Te quedaste sin intentos!!");
 			}
 		} else {
-			System.out.println("Enhorabuena!! Has ganado!! ");
+			System.out.println("Enhorabuena!! Has ganado!! "); //si la palabra introducida es igual muestra un mensaje de que ha ganado.
 			salirBucle = true;
 
 		}
@@ -166,7 +169,7 @@ public class Partida {
 		}
 	}
 
-	public static int contarAsteriscos() {
+	public static int contarAsteriscos() { //método cuenta los asteriscos para cuando queden 2 o menos letras por adivinar pierde automaticamente.
 		int contadorAsterisco = 0;
 
 		for (int i = 0; i < letrasVacias.length; i++) {
