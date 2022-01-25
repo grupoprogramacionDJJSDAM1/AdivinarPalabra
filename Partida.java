@@ -30,7 +30,7 @@ public Partida(Palabra arrayPalabras[]) {
 	}
 
 public static void numeroRandom() throws IOException, NullPointerException {
-	 elegirPalabra =(int)(Math.random()*(3)+1);
+	 elegirPalabra =(int)(Math.random()*(3));
 	 	
 }
 
