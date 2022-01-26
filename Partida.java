@@ -81,7 +81,6 @@ public class Partida {
 				case 1:
 					System.out.println("Has elegido resolver la palabra. ");
 					resolverPalabra();
-					br.readLine(); // Para que no vuelva a mostrar el menu o se meta en bucle infinito.
 					break;
 				case 2:
 					System.out.println("Has elegido decir letra.");
@@ -91,7 +90,7 @@ public class Partida {
 						break;
 					}
 					decirLetra();
-					br.readLine();
+					br.readLine();// Para que no vuelva a mostrar el menu o se meta en bucle infinito.
 					break;
 				case 3:
 					System.out.println("Has elegido dar palabra.");
@@ -147,6 +146,7 @@ public class Partida {
 			while (intentos == 0) { //si se queda sin intentos se acaba la partida.
 				salirBucle = true;
 				System.out.println("Has perdido!! Te quedaste sin intentos!!");
+				break;
 			}
 		} else {
 			System.out.println("Enhorabuena!! Has ganado!! "); //si la palabra introducida es igual muestra un mensaje de que ha ganado.
@@ -161,6 +161,11 @@ public class Partida {
             elegirLetra = (int) (Math.random() * ((palabras[elegirPalabra].getValor().length())));//posicion aleatoria para revelar letras
             letrasVacias[elegirLetra] = palabras[elegirPalabra].getLetrasDisponibles()[elegirLetra];//se le da el valor de la letra que esté en la posicion salida anteriormente
             palabras[elegirPalabra].setPosicionesOcupadas(elegirLetra);//se pone la posicion de la letra en true en su array de booleanos, que está lleno de falses
+} 
+        for (int j = 0; j < (palabras[elegirPalabra].getValor().length()); j++) {
+        	if(palabras[elegirPalabra].getPosicionesOcupadas()[j]==false) {
+        		letrasVacias[j]='*';
+	}
 }
         }
     
