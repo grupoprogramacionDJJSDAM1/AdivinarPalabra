@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 
-/* Enunciado: Calculadora de operaciones modularizada.
+/* Enunciado: Juego adivinar palabra
 
  * Fecha: 25/01/22
  * Autor: Jaime Fernando Martín Gil, Jorge Parra López, David Mateos Lorenzo y Saul Fernández García.
@@ -12,7 +12,7 @@ import java.time.LocalDate;
  * 
  * -Metodo numeroRandom() genera una palabra aleatoria entre las 3 que hay.
  * -Metodo pintarMenuPrincipal() no devuelve nada ni tiene parametros, pinta el menu. 
- *-Metodo menu() ejecuta el menu.
+ * -Metodo menu() ejecuta el menu.
  * -Metodo darPalabra() Obtiene el valor de la palabra y se muestra al jugador.
  * -Metodo decirLetra() desvela la letra que introduce el jugador.
  * -Metodo resolverPalabra() se le pide que introduzca la palabra.
